@@ -9,20 +9,21 @@
     </head>
     <body>
         <form>
-            <div class="login-form">
+            <div class="background">
+                
                 <h3>Login here</h3>
 
-                <div>
+                <p>
                     <label for="username">Username</label>
-                    <input type="text" placeholder="Email" id="email" required/>   
-                </div>
-                <div>
+                    <input class="input" type="text" placeholder="Email" id="email" minlength="2" required/>   
+                </p>
+                <p>
                     <label for="password">Password</label>
-                    <input type="text" placeholder="Password" id="password" required/>   
-                </div>
-                <div>
+                    <input class="input" type="text" placeholder="Password" id="password" minlength="2" required/>   
+                </p>
+                <p>
                     <button name="submit" type="submit">Log In</button>
-                </div>
+                </p>
             </div>
         </form>
     </body>
