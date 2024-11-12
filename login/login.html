@@ -6,24 +6,35 @@
         <meta charset="UTF-8"/>
         <title>Login</title>
         <link rel="stylesheet" href="login.css"/>
+        <style media="screen"></style>
     </head>
     <body>
-        <form>
-            <div class="background">
-                
-                <h3>Login here</h3>
-
-                <p>
+        <div class="background">
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="form-container" id="formContainer">
+            <div class="form-box" id="formBox">
+                <form id="loginForm">
+                    <h3>Login here</h3>
                     <label for="username">Username</label>
-                    <input class="input" type="text" placeholder="Email" id="email" minlength="2" required/>   
-                </p>
-                <p>
+                    <input class="input" type="text" placeholder="Username" id="username" minlength="2" required/>   
                     <label for="password">Password</label>
-                    <input class="input" type="text" placeholder="Password" id="password" minlength="2" required/>   
-                </p>
-                <p>
-                    <button name="submit" type="submit">Log In</button>
-                </p>
+                    <input class="input" type="password" placeholder="Password" id="password" minlength="2" required/>   
+                    <button class="login" name="submit" type="submit">Log In</button>
+                    <button type="button" class="signup" onclick="flipForm()">Sign Up</button>
+                </form>
+
+                <form id="signupForm">
+                    <h3>Create Account</h3>
+                    <label for="newUsername">Username</label>
+                    <input class="input" type="text" placeholder="Username" id="newUsername" minlength="2" required/>
+                    <label for="newPassword">Password</label>
+                    <input class="input" type="password" placeholder="Password" id="newPassword" minlength="2" required/>
+                    <button class="signup" type="submit">Sign Up</button>
+                    <button type="button" class="login" onclick="flipForm()">Log In</button>                </form>
             </div>
-        </form>
+        </div>
+        <script src="login.js"></script>
     </body>
+</html>
