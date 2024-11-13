@@ -49,16 +49,20 @@ body{
 .form-container{
     perspective: 1000px;
     position: relative;
+    height: 520px;
+    width: 400px;
 }
 
 .form-box{
-    width: 400px;
-    height: 520px;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
     transform-style: preserve-3d;
     transition: transform 0.6s;
     transform-origin: center center;
     z-index: 1;
+    backface-visibility: hidden;
 }
 
 .form-box.flipped{
@@ -66,18 +70,19 @@ body{
 }
 
 form{
-    height:520px;
-    width: 400px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     position: absolute;
+    top: 0;
+    left: 0;
     background-color: rgba(255, 255, 255, 0.13);
     backdrop-filter: blur(10px);
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
     border-radius: 10px;
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
+    z-index: 2;
     backface-visibility: hidden;
 }
 
@@ -91,6 +96,7 @@ form *{
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+    margin: 0;
 }
 
 form h3{
@@ -157,6 +163,10 @@ input{
     background-color: rgba(255, 255, 255, 0.27);
     color: #eaf0fb;
     margin-top:30px;;
+}
+
+.form-box.flipped .login:hover{
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .form-box.flipped .signup {
