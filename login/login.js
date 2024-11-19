@@ -46,10 +46,10 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     }
 });
 
-
 function flipForm() {
     const formBox = document.getElementById("formBox");
-    formBox.classList.toggle("flipped");
+    document.getElementById('loginForm').classList.toggle("flipped");
+    document.getElementById('signupForm').classList.toggle("flipped");
     
     document.getElementById('loginForm').reset();
     document.getElementById('signupForm').reset();

@@ -68,8 +68,11 @@ body{
     backface-visibility: hidden;
 }
 
-.form-box.flipped{
-    transform:rotateY(180deg);
+#signupForm.flipped{
+    transform:rotateY(0deg);
+}
+#loginForm.flipped{
+    transform:rotateY(-180deg);
 }
 
 form{
@@ -85,7 +88,10 @@ form{
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
     z-index: 2;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
 }
 
 #signupForm{
@@ -128,7 +134,7 @@ input{
 }
 
 ::placeholder{
-    color: #e5e5e5;
+    color: #e5e5e5b2;
 }
 
 .login
@@ -142,7 +148,7 @@ input{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.6s, color 0.6s, margin-top 0.6s;
 }
 
 
@@ -158,23 +164,23 @@ input{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.6s, color 0.6s, margin-top 0.6s;
 }
 
-.form-box.flipped .login {
+#signupForm.flipped .login {
+    margin-top:30px;
     background-color: rgba(255, 255, 255, 0.27);
     color: #eaf0fb;
-    margin-top:30px;;
 }
 
-.form-box.flipped .login:hover{
+#signupForm.flipped .login:hover{
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.form-box.flipped .signup {
+#signupForm.flipped .signup {
+    margin-top: 50px;
     background-color: #ffffff;
     color: #080710;
-    margin-top: 50px;
 }
 
 .signup:hover {
