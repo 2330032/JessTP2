@@ -1,0 +1,149 @@
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #080710;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+.score-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.score-container span {
+    margin-right: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 40px;
+    margin: 0 20px;
+}
+
+.cookie-container {
+    text-align: center;
+}
+
+#cookie-button {
+    font-size: 24px;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    color: #080710;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.6s, color 0.6s;
+}
+
+#cookie-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+
+.purchase-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.purchase-column {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 40px;
+    margin: 0 20px;
+}
+
+.purchase-column h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.purchase-item {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.purchase-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+  
+.purchase-item h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+  
+.purchase-item p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+  
+.buy-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #080710;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.6s, color 0.6s;
+}
+  
+.buy-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
