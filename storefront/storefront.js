@@ -3,6 +3,7 @@ const currencyElement = document.getElementById('currency');
 
 let score = 0;
 let currency = 0;
+let currencyPerClick = 1;
 
 function initializeDatabase() {
   const request = window.indexedDB.open("cookieClickerDB", 1);
@@ -15,7 +16,8 @@ function initializeDatabase() {
 
     const initialGameData = [
       { id: 1, type: 'score', value: 0 },
-      { id: 2, type: 'currency', value: 0 }
+      { id: 2, type: 'currency', value: 0 },
+      { id: 3, type: 'currencyPerClick', value: 1 }
     ];
 
     initialGameData.forEach(item => {
@@ -25,8 +27,8 @@ function initializeDatabase() {
     const inventoryStore = db.createObjectStore("inventory", { keyPath: "id" });
 
     const initialInventory = [
-      { id: 1, name: "Upgrade 1", price: 15, type: "upgrade", available: true },
-      { id: 2, name: "Skin 1", price: 50, type: "skin", available: true }
+      { id: 1, name: "Upgrade", description: "More clicks per click!", basePrice: 15, priceMultiplier: 1.5, currentPrice: 15, type: "upgrade", available: true },
+      { id: 2, name: "Green", description: "It's green now", basePrice: 50, priceMultiplier: 1.0, currentPrice: 50, type: "skin", available: true }
     ];
 
     initialInventory.forEach(item => {
@@ -58,6 +60,11 @@ function loadGameData() {
       currency = currencyRequest.result ? currencyRequest.result.value : 0;
       currencyElement.textContent = currency;
     };
+
+    const currencyPerClickRequest = objectStore.get(3);
+    currencyPerClickRequest.onsuccess = function(event) {
+      currencyPerClick = currencyPerClickRequest.result ? currencyPerClickRequest.result.value : 1;
+    };
   };
 }
 
@@ -87,7 +94,7 @@ function updateGameData() {
 const clickableCircle = document.querySelector('.clickable-circle');
 clickableCircle.addEventListener('click', () => {
   score++;
-  currency++;
+  currency += currencyPerClick;
 
   scoreElement.textContent = score;
   currencyElement.textContent = currency;
@@ -106,7 +113,6 @@ function loadInventory() {
 
     request.onsuccess = function(event) {
       const inventory = event.target.result;
-      console.log('Inventory loaded:', inventory);
       updateInventoryUI(inventory);
     };
   };
@@ -125,8 +131,8 @@ function updateInventoryUI(inventory) {
     itemDiv.innerHTML = `
       <img src="${item.type === 'upgrade' ? 'upgrade1.png' : 'skin1.png'}" alt="${item.name}">
       <h3>${item.name}</h3>
-      <p>Description of ${item.name}</p>
-      <p>Price: ${item.price} Currency</p>
+      <p>${item.description}</p>
+      <p>Price: ${item.currentPrice}</p>      
       <button class="buy-button" data-id="${item.id}" ${item.available ? '' : 'disabled'}>Buy</button>
     `;
     
@@ -150,21 +156,43 @@ function handlePurchase(itemId) {
   const request = window.indexedDB.open("cookieClickerDB", 1);
   request.onsuccess = function(event) {
     const db = event.target.result;
-    const transaction = db.transaction(["inventory"], "readwrite");
-    const objectStore = transaction.objectStore("inventory");
-    const request = objectStore.get(itemId);
+    const transaction = db.transaction(["inventory", "gameData"], "readwrite");
+    const inventoryStore = transaction.objectStore("inventory");
+    const gameDataStore = transaction.objectStore("gameData");
 
-    request.onsuccess = function(event) {
-      const item = event.target.result;
+    const itemRequest = inventoryStore.get(itemId);
+    itemRequest.onsuccess = function(event) {
+      const item = itemRequest.result;
 
-      if (currency >= item.price && item.available) {
-        currency -= item.price;
-        item.available = false;
+      if (currency >= item.currentPrice && item.available) {
+        currency -= item.currentPrice;
 
-        objectStore.put(item);
+        if (item.type === 'skin') {
+          item.available = false;
+          item.currentPrice = 'Void'
+          item.name = "Uh-oh";
+          item.description = "No going back";
+          changeCircleColor();
+        } else if (item.type === 'upgrade') {
+          currencyPerClick++;
+
+
+          const currencyPerClickRequest = gameDataStore.get(3);
+          currencyPerClickRequest.onsuccess = function(event) {
+            const currencyPerClickData = currencyPerClickRequest.result;
+            currencyPerClickData.value = currencyPerClick;
+            gameDataStore.put(currencyPerClickData);
+          };
+
+          item.currentPrice = Math.ceil(item.currentPrice * item.priceMultiplier);
+        }
+
+        inventoryStore.put(item); 
         updateGameData(); 
-        loadInventory(); 
+        
         currencyElement.textContent = currency;
+
+        loadInventory();
       } else {
         alert('You do not have enough currency to buy this item.');
       }
@@ -173,3 +201,8 @@ function handlePurchase(itemId) {
 }
 
 initializeDatabase();
+
+function changeCircleColor() {
+  const clickableCircle = document.querySelector('.clickable-circle');
+  clickableCircle.style.background = 'linear-gradient(#c7f800, #078513)';
+}

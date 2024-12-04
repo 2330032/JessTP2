@@ -86,10 +86,11 @@ main {
 .clickable-circle:focus {
     outline: none;
 }  
-  .clickable-circle:active {
+
+.clickable-circle:active {
     transform: translate(-50%, -50%) scale(0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
+}
   
 
 
