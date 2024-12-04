@@ -64,12 +64,12 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             alert('Username does not exist. Please sign up first.');
         } else if (user.password === password) {
             alert('Login successful!');
+            window.location.href = "../storefront/storefront.html";
         } else {
             alert('Invalid password. Please try again.');
         }
         document.getElementById('loginForm').reset();
 
-        window.location.href = "../storefront/storefront.html";
     };
     getRequest.onerror = function() {
         console.error("Error checking user existence:", getRequest.error);
