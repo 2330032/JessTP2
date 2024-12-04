@@ -62,23 +62,35 @@ main {
 }
 
 .cookie-container {
-    text-align: center;
-}
-
-#cookie-button {
-    font-size: 24px;
-    padding: 20px 40px;
-    background-color: #ffffff;
-    color: #080710;
-    border: none;
-    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    height: 300px; 
+  }
+  
+.clickable-circle {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     cursor: pointer;
-    transition: background-color 0.6s, color 0.6s;
-}
+    background: linear-gradient(#fa409d, #cb0ee2);
+    user-select: none;
+    -webkit-user-select: none;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+}   
 
-#cookie-button:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-}
+.clickable-circle:focus {
+    outline: none;
+}  
+  .clickable-circle:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
 
 
 .purchase-container {
